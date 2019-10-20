@@ -13,10 +13,12 @@
 </head>
 <body>
     <header class="row">
-        <h1><?=$title?></h1>
+        <h1><?=$title ?></h1>
     </header>
-    <p>This is sample content.</p>
-    <p>これは、Helloレイアウトを利用したサンプルです。</p>
+
+    <div class="row">
+        <p><?=$message ?></p>
+    </div>
     
         
         
