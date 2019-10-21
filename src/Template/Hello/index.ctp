@@ -17,11 +17,26 @@
     </header>
 
     <div class="row">
-        <p><?=$message ?></p>
+        <pre><?php print_r($data); ?></pre>
     </div>
-    
+    <div class="row">
+        <table>
+            <?=$this->Form->create(null,
+            ['type'=>'post',
+            'url'=>['controller'=>'Hello',
+            'action'=>'index']])?>
+
+            <tr><th>name</th><td>
+            <?=$this->Form->text('Form1.name')?></td></tr>
+            <tr><th>mail</th><td>
+            <?=$this->Form->text('Form1.mail')?></td></tr>
+            <tr><th>age</th><td>
+            <?=$this->Form->text('Form1.age')?></td></tr>
+            <tr><th></th><td>
+            <?=$this->Form->submit('送信')?></td></tr>
+            <?=$this->Form->end()?>
+        </table>
         
-        
-    
+    </div>
 </body>
 </html>
