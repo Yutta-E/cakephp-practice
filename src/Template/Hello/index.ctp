@@ -36,6 +36,13 @@
                 ['text'=>'mail','value'=>'男性','checked'=>'true'],
                 ['text'=>'femail','value'=>'女性'],
             ])?>
+
+            <tr><th>Select</th><td>
+            <?=$this->Form->select('Form1.select',
+                ['one'=>'最初','two'=>'2番目','three'=>'真ん中',
+                'four'=>'4番目','five'=>'最後'])?>
+            
+            </td></tr>
             
             </td></tr>
 

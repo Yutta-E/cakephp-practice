@@ -50,6 +50,9 @@ class UsersTable extends Table
 		]);
 		$this->hasMany('Bidrequests', [
 			'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('Bidevaluations', [
+			'foreignKey' => 'user_id'
 		]);
 	}
 
@@ -83,7 +86,7 @@ class UsersTable extends Table
 		return $validator;
 	}
 
-	/**
+		/**
 	 * Returns a rules checker object that will be used for validating
 	 * application integrity.
 	 *

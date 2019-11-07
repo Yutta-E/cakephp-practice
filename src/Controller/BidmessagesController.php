@@ -37,7 +37,7 @@ class BidmessagesController extends AuctionBaseController
     public function view($id = null)
     {
         $bidmessage = $this->Bidmessages->get($id, [
-            'contain' => ['Bidinfos', 'Users']
+            'contain' => ['Bidinfo', 'Users']
         ]);
 
         $this->set('bidmessage', $bidmessage);

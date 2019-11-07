@@ -7,23 +7,23 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Bidmessages Model
+ * Bidevaluations Model
  *
- * @property \App\Model\Table\BidinfoTable&\Cake\ORM\Association\BelongsTo $Bidinfo
+ * @property \App\Model\Table\BidinfosTable&\Cake\ORM\Association\BelongsTo $Bidinfos
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  *
- * @method \App\Model\Entity\Bidmessage get($primaryKey, $options = [])
- * @method \App\Model\Entity\Bidmessage newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Bidmessage[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Bidmessage|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Bidmessage saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Bidmessage patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Bidmessage[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Bidmessage findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Bidevaluation get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Bidevaluation newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Bidevaluation[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Bidevaluation|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Bidevaluation saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Bidevaluation patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Bidevaluation[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Bidevaluation findOrCreate($search, callable $callback = null, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class BidmessagesTable extends Table
+class BidevaluationsTable extends Table
 {
     /**
      * Initialize method
@@ -35,13 +35,13 @@ class BidmessagesTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('bidmessages');
+        $this->setTable('bidevaluations');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Bidinfo', [
+        $this->belongsTo('Bidinfos', [
             'foreignKey' => 'bidinfo_id',
             'joinType' => 'INNER'
         ]);
@@ -64,9 +64,14 @@ class BidmessagesTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->scalar('message')
-            ->requirePresence('message', 'create')
-            ->notEmptyString('message');
+            ->integer('stars')
+            ->requirePresence('stars', 'create')
+            ->notEmptyString('stars');
+
+        $validator
+            ->scalar('comment')
+            ->requirePresence('comment', 'create')
+            ->notEmptyString('comment');
 
         return $validator;
     }
@@ -80,7 +85,7 @@ class BidmessagesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['bidinfo_id'], 'Bidinfo'));
+        $rules->add($rules->existsIn(['bidinfo_id'], 'Bidinfos'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
