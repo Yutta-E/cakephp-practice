@@ -20,7 +20,7 @@ class BidevaluationsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Bidinfos', 'Users']
+            'contain' => ['Bidinfo', 'Users']
         ];
         $bidevaluations = $this->paginate($this->Bidevaluations);
 
@@ -37,7 +37,7 @@ class BidevaluationsController extends AppController
     public function view($id = null)
     {
         $bidevaluation = $this->Bidevaluations->get($id, [
-            'contain' => ['Bidinfos', 'Users']
+            'contain' => ['Bidinfo', 'Users']
         ]);
 
         $this->set('bidevaluation', $bidevaluation);
@@ -60,9 +60,9 @@ class BidevaluationsController extends AppController
             }
             $this->Flash->error(__('The bidevaluation could not be saved. Please, try again.'));
         }
-        $bidinfos = $this->Bidevaluations->Bidinfos->find('list', ['limit' => 200]);
+        $bidinfo = $this->Bidevaluations->Bidinfo->find('list', ['limit' => 200]);
         $users = $this->Bidevaluations->Users->find('list', ['limit' => 200]);
-        $this->set(compact('bidevaluation', 'bidinfos', 'users'));
+        $this->set(compact('bidevaluation', 'bidinfo', 'users'));
     }
 
     /**
@@ -86,9 +86,9 @@ class BidevaluationsController extends AppController
             }
             $this->Flash->error(__('The bidevaluation could not be saved. Please, try again.'));
         }
-        $bidinfos = $this->Bidevaluations->Bidinfos->find('list', ['limit' => 200]);
+        $bidinfo = $this->Bidevaluations->Bidinfo->find('list', ['limit' => 200]);
         $users = $this->Bidevaluations->Users->find('list', ['limit' => 200]);
-        $this->set(compact('bidevaluation', 'bidinfos', 'users'));
+        $this->set(compact('bidevaluation', 'bidinfo', 'users'));
     }
 
     /**

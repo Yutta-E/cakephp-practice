@@ -13,27 +13,36 @@
 </head>
 <body>
 <h2><?=$authuser['username'] ?> のホーム</h2>
-<h3>※落札情報</h3>
+<h3>評価ページ</h3>
 <table cellpadding="0" cellspacing="0">
 <thead>
-	<tr>
+    <tr>
 		<th scope="col"><?= $this->Paginator->sort('id') ?></th>
 		<th class="main" scope="col"><?= $this->Paginator->sort('name') ?></th>
 		<th scope="col"><?= $this->Paginator->sort('created') ?></th>
-		<th scope="col" class="actions"><?= __('Actions') ?></th>
-	</tr>
+        <th scope="col"><?= $this->Paginator->sort('point') ?></th>
+    </tr>
+    
 </thead>
 <tbody>
-	<?php foreach ($bidinfo as $info): ?>
-	<tr>
-		<td><?= h($info->id) ?></td>
-		<td><?= h($info->biditem->name) ?></td>
-		<td><?= h($info->created) ?></td>
-		<td class="actions">
-			<?= $this->Html->link(__('View'), ['action' => 'msg', $info->id]) ?>
-		</td>
-	</tr>
-	<?php endforeach; ?>
+    <?php foreach ($bidinfo as $info): ?>
+        <tr>
+            <td><?= h($info->id) ?></td>
+            <td><?= h($info->biditem->user->username) ?></td>
+            <td><?= h($info->created) ?></td>
+            <td><?= h($info->bideval->stars) ?></td>
+        </tr>
+    <?php endforeach; ?>
+    
+    <p>ポイント</p>
+    <?= $this->Form->create($bideval)?>
+    <?= $this->Form->select('stars',
+    ['one'=>1,'two'=>2,'three'=>3,'four'=>4,'five'=>5])?>
+    <p>コメント</p>
+    <?= $this->Form->textarea('comment',['row'=>1]);?>
+    <?= $this->Form->button('Submit')?>
+    <?= $this->Form->end()?>
+    <p>出品者情報</p>
 </tbody>
 </table>
 
@@ -47,7 +56,7 @@
 	</ul>
 </div>
 <h6><?= $this->Html->link(__('出品情報に移動 >>'), ['action' => 'home2']) ?></h6>
-<h6><?= $this->Html->link(__('出品者を評価する'), ['action' => 'evaluation',$info->id]) ?></h6>
+
 
 
 </body>

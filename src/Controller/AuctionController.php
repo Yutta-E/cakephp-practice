@@ -189,5 +189,36 @@ class AuctionController extends AuctionBaseController
 			'limit' => 10])->toArray();
 		$this->set(compact('biditems'));
     }
-    
-}
+    public function evaluation($bidinfo_id = null)
+    {
+        //bidinfoの取得
+        $bidinfo = $this->paginate('Bidinfo', [
+			'conditions'=>['Bidinfo.user_id'=>$this->Auth->user('id')], 
+			'contain' => ['Users', 'Biditems','Biditems'=>['Users'],'Bidevaluations'],
+			'order'=>['created'=>'desc'],
+			'limit' => 10])->toArray();
+        $this->set(compact('bidinfo'));
+        
+		// Bidevalutionsを新たに用意
+		$bideval = $this->Bidevaluations->newEntity();
+		// POST送信時の処理
+		if ($this->request->is('post')) {
+			// 送信されたフォームで$bidevalを更新
+			$bideval = $this->Bidevaluations->patchEntity($bideval, $this->request->getData());
+			// Bidevaluationsを保存
+			if ($this->Bidevaluations->save($bideval)) {
+				$this->Flash->success(__('保存しました。'));
+			} else {
+				$this->Flash->error(__('保存に失敗しました。もう一度入力下さい。'));
+			}
+		}
+		
+		// Bidevaluationsをbidinfo_idとuser_idで検索
+		$bideval = $this->Bidevaluations->find('all',[
+			'conditions'=>['bidinfo_id'=>$bidinfo_id],
+			'contain' => ['Users'],
+			'order'=>['created'=>'desc']]);
+		$this->set(compact('bideval', 'bidinfo'));
+	}
+    }
+

@@ -47,7 +47,7 @@
 	</ul>
 </div>
 <h6><?= $this->Html->link(__('出品情報に移動 >>'), ['action' => 'home2']) ?></h6>
-<h6><?= $this->Html->link(__('出品者を評価する'), ['action' => 'evaluation',$info->id]) ?></h6>
+<h6><?= $this->Html->link(__('出品者を評価する >>'), ['action' => 'evaluation',$info->id]) ?></h6>
 
 
 </body>
