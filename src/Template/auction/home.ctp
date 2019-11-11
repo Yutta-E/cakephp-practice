@@ -20,7 +20,8 @@
 		<th scope="col"><?= $this->Paginator->sort('id') ?></th>
 		<th class="main" scope="col"><?= $this->Paginator->sort('name') ?></th>
 		<th scope="col"><?= $this->Paginator->sort('created') ?></th>
-		<th scope="col" class="actions"><?= __('Actions') ?></th>
+        <th scope="col" class="actions"><?= __('Actions') ?></th>
+        <th scope="col" class="actions"><?= __('評価') ?></th>
 	</tr>
 </thead>
 <tbody>
@@ -31,7 +32,10 @@
 		<td><?= h($info->created) ?></td>
 		<td class="actions">
 			<?= $this->Html->link(__('View'), ['action' => 'msg', $info->id]) ?>
-		</td>
+        </td>
+        <td>
+            <?= $this->Html->link(__('出品者を評価する'), ['action' => 'evaluation', $info->id]) ?>
+        </td>
 	</tr>
 	<?php endforeach; ?>
 </tbody>
@@ -47,7 +51,7 @@
 	</ul>
 </div>
 <h6><?= $this->Html->link(__('出品情報に移動 >>'), ['action' => 'home2']) ?></h6>
-<h6><?= $this->Html->link(__('出品者を評価する >>'), ['action' => 'evaluation',$info->id]) ?></h6>
+
 
 
 </body>
