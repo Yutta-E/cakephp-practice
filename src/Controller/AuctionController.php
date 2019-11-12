@@ -203,8 +203,8 @@ class AuctionController extends AuctionBaseController
         
 		// Bidevalutionsを新たに用意
         $bideval = $this->Bidevaluations->newEntity();
-        //$this->log($bideval);
-        //$this->log($bideval);
+        $this->log($bideval);
+        
 		// POST送信時の処理
 		if ($this->request->is('post')) {
 			// 送信されたフォームで$bidevalを更新
@@ -214,8 +214,9 @@ class AuctionController extends AuctionBaseController
 				$this->Flash->success(__('保存しました。'));
 			} else {
 				$this->Flash->error(__('保存に失敗しました。もう一度入力下さい。'));
-			}
-		}
+            }
+        }
+        var_dump($this->request->data());
 		
 		// Bidevaluationsをbidinfo_idとuser_idで検索
 		$bideval = $this->Bidevaluations->find('all',[
