@@ -158,7 +158,9 @@ class AuctionController extends AuctionBaseController
 			$bidinfo = $this->Bidinfo->get($bidinfo_id, ['contain'=>['Biditems']]);
 		} catch(Exception $e){
 			$bidinfo = null;
-		}
+        }
+        $this->log($bidmsg);
+
 		// Bidmessageをbidinfo_idとuser_idで検索
 		$bidmsgs = $this->Bidmessages->find('all',[
 			'conditions'=>['bidinfo_id'=>$bidinfo_id],
@@ -192,7 +194,6 @@ class AuctionController extends AuctionBaseController
     }
     public function evaluation($bidinfo_id = null)
     {
-        var_dump($this->request->data());
         //bidinfoの取得
         $bidinfo = $this->paginate('Bidinfo', [
 			'conditions'=>['Bidinfo.user_id'=>$this->Auth->user('id')], 
@@ -203,7 +204,7 @@ class AuctionController extends AuctionBaseController
         
 		// Bidevalutionsを新たに用意
         $bideval = $this->Bidevaluations->newEntity();
-        $this->log($bideval);
+        
         
 		// POST送信時の処理
 		if ($this->request->is('post')) {
@@ -217,6 +218,7 @@ class AuctionController extends AuctionBaseController
             }
         }
         var_dump($this->request->data());
+        //var_dump($this->Bidevaluations->patchEntity());
 		
 		// Bidevaluationsをbidinfo_idとuser_idで検索
 		$bideval = $this->Bidevaluations->find('all',[
