@@ -12,6 +12,7 @@
     </style>
 </head>
 <body>
+<?php if (!empty($bidinfo)): ?>
 <h2>商品「<?=$bidinfo->biditem->name ?> 」</h2>
 <h3>評価ページ</h3>
 
@@ -39,6 +40,7 @@
     
 </thead>
 <tbody>
+    <?php if (!empty($bidevals)): ?>
     <?php foreach ($bidevals as $bideval): ?>
     <pre><?php //print_r($bidinfo)?></pre>
         <tr>
@@ -49,14 +51,18 @@
             <td><?= h($bideval->comment) ?></td>
         </tr>
     <?php endforeach; ?>
+    <?php else:?>
+        <tr><td colspan="3">※メッセージがありません。</td></tr>
+    <?php endif;?>
     
     <p>出品者情報</p>
     
     <pre><?php //print_r($bideval)?></pre>
-    
-
 </tbody>
 </table>
+<?php else: ?>
+<h2>※落札情報はありません。</h2>
+<?php endif; ?>
 
 
 </body>
