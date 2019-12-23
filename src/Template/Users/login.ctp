@@ -26,6 +26,5 @@
         <?= $this->Form->end()?>
 
     </div>
-    <p><?=print_r($user);?></p>
 </body>
 </html>
